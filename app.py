@@ -1,30 +1,22 @@
 from tkinter import *
+import tkSimpleDialog
 
-class MyDialog:
+class MyDialog(tkSimpleDialog.Dialog):
 
-    def __init__(self, parent):
+    def body(self, master):
 
-        top = self.top = Toplevel(parent)
+        Label(master, text="First:").grid(row=0)
+        Label(master, text="Second:").grid(row=1)
 
-        Label(top, text="Value").pack()
+        self.e1 = Entry(master)
+        self.e2 = Entry(master)
 
-        self.e = Entry(top)
-        self.e.pack(padx=5)
-
-        b = Button(top, text="OK", command=self.ok)
-        b.pack(pady=5)
-
-    def ok(self):
-
-        print("value is", self.e.get())
-
-        self.top.destroy()
+        self.e1.grid(row=0, column=1)
+        self.e2.grid(row=1, column=1)
+        return self.e1 # initial focus
 
 
 root = Tk()
-Button(root, text="Hello!").pack()
 root.update()
 
 d = MyDialog(root)
-
-root.wait_window(d.top)
